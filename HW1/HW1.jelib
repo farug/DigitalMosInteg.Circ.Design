@@ -5,7 +5,7 @@ HHW1|9.07
 Vlayout|lay
 
 # Cell PLL;1{lay}
-CPLL;1{lay}||mocmos|1741198499559|1741894195287||DRC_last_good_drc_area_date()G1741894198813|DRC_last_good_drc_bit()I18|DRC_last_good_drc_date()G1741894198813
+CPLL;1{lay}||mocmos|1741198499559|1742844124246||DRC_last_good_drc_area_date()G1741894198813|DRC_last_good_drc_bit()I18|DRC_last_good_drc_date()G1741894198813
 NMetal-1-P-Well-Con|0|D5G1;|-6|-43|70|||
 NMetal-1-N-Well-Con|1.8|D5G1;|-5|19|70|||
 Ngeneric:Facet-Center|art@0||0|0||||AV
@@ -60,6 +60,8 @@ NMetal-1-Pin|pin@27||-51|19||||
 NMetal-1-Pin|pin@28||43|19||||
 NMetal-1-Pin|pin@29||-58|-43||||
 NMetal-1-Pin|pin@30||46|-43||||
+Ngeneric:Invisible-Pin|pin@31||-49|19|||||ART_message(D5G1;)SVDD
+Ngeneric:Invisible-Pin|pin@32||-54|-43|||||ART_message(D5G1;)SGND
 NP-Transistor|pmos@0||-40|1|2|||
 NP-Transistor|pmos@1||-23|1|2|||
 NP-Transistor|pmos@2||-6|1|2|||
