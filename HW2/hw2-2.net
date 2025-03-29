@@ -1,12 +1,12 @@
 Trnasient Analysis
-* Transient Analysis of R-C Network with Pulse Source
-
+* Circuit Part
 Vin in 0 PULSE(0 1 10u 10n 10n 10u 20u)
 R1 in out 1k
 R2 out 0 1k
 C1 out 0 10nF
 
-* Transient Analysis
-.TRAN 100n 100u
-.PLOT TRAN V(in) V(out)
-.END
+
+* Transient Analysis Part
+.tran 1n 100u
+.plot tran V(in) V(out)
+.end

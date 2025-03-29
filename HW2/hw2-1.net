@@ -1,14 +1,14 @@
 DC Analysis
-* Simple R-C Network
+* Circuit Part
 
 V1 in 0 DC 1V
 R1 in out 1k
 R2 out 0 1k
 C1 out 0 10nF
 
-* DC Sweep Analysis
-.DC V1 0 1 1m
-.PLOT DC V(out)
-.END
+* DC Sweep Analysis Part
+.dc V1 0 1 1m
+.plot DC V(out)
+.end
 
 
