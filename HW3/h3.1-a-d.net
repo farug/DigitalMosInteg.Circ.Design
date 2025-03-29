@@ -1,0 +1,25 @@
+HW3 DC Sweep
+* Circuit Parts
+*For a-d calculations
+
+
+V1 a d dc 1V
+R1 a b 1k
+R2 a d 1k
+R3 a h 1k
+R4 b e 1k
+R5 b c 1k
+R6 c f 1k
+R7 e f 1k
+R8 e h 1k
+R9 h g 1k
+R10 g f 1k
+R11 g d 1k
+R12 c d 1k
+Rwire a d 0
+
+
+* DC Sweep Analysis
+.dc V1 0.1 1 0.01
+.plot dc V(a)/I(R2)
+.end
