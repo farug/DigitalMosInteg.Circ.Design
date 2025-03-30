@@ -22,4 +22,6 @@ Rwire a d 0
 * DC Sweep Analysis
 .dc V1 0.1 1 0.01
 .plot dc V(a)/I(R2)
+.options savecurrents 
+
 .end

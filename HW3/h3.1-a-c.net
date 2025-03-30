@@ -1,6 +1,7 @@
 HW3 DC Sweep
 * Circuit Parts
 
+V1 in 0 DC 1V
 R1 a b 1k
 R2 a d 1k
 R3 a h 1k
