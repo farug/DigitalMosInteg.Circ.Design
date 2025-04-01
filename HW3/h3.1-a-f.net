@@ -14,3 +14,12 @@ R9 h g 1k
 R10 g f 1k
 R11 g d 1k
 R12 c d 1k
+
+.control
+* DC Sweep Analysis
+.dc V1 0.1 1 0.01
+plot -V1#branch
+
+.plot -V1#branch/V(1)
+.endc
+.end
