@@ -22,6 +22,7 @@ Rwire d 0 0
 .control
 * DC Sweep Analysis
 dc V1 0.1 1 0.01
+plot -V1#branch
 plot -V1#branch/v(a)
 
 .endc
