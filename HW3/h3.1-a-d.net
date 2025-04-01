@@ -16,7 +16,7 @@ R9 h g 1k
 R10 g f 1k
 R11 g d 1k
 R12 c d 1k
-Rwire a d 0
+Rwire d 0 0
 
 
 .control
