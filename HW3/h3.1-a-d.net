@@ -19,9 +19,13 @@ R12 c d 1k
 Rwire a d 0
 
 
+.control
 * DC Sweep Analysis
 .dc V1 0.1 1 0.01
-.plot dc V(a)/I(R2)
-.options savecurrents 
+plot -V1#branch
+
+.plot -V1#branch/V(1)
+.endc
+*.options savecurrents 
 
 .end
