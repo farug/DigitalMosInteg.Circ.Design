@@ -21,6 +21,6 @@ Rw f 0 0
 dc V1 0.1 1 0.01
 plot -V1#branch
 
-plot -V1#branch/V(a)
+plot V(a)/-V1#branch
 .endc
 .end

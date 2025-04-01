@@ -1,7 +1,7 @@
 HW3 DC Sweep
 * Circuit Parts
 
-V1 a b DC 1V
+V1 a c DC 1V
 R1 a b 1k
 R2 a d 1k
 R3 a h 1k
@@ -14,13 +14,13 @@ R9 h g 1k
 R10 g f 1k
 R11 g d 1k
 R12 c d 1k
-Rwire b 0 0
+Rwire c 0 0
 
 .control
 * DC Sweep Analysis
 dc V1 0.1 1 0.01
 plot -V1#branch
 
-plot -V1#branch/V(a)
+plot V(a)/-V1#branch
 .endc
 .end

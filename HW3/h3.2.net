@@ -1,0 +1,14 @@
+* Simple RC Circuit for Time Constant Analysis
+
+* Define components
+V1 1 0 PULSE(0 1 1u 10n 10n 5u 10u)
+R1 1 a 1k
+C1 a 0 1n
+
+
+.control
+* Perform transient analysis
+tran 1n 20u
+plot V(1) V(a)
+.endc
+.end
