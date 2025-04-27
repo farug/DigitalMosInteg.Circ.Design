@@ -1,0 +1,13 @@
+inverter vtc
+.incl tsmc18.sp
+
+vdd 1 0 dc 1.8
+vin in 0 dc 0
+mn1 out in 0 0 cmosn w=0.3u l=0.2u
+mp1 out in 1 1 cmosp w=0.9u l=0.2u
+.control
+dc vin 0 1.8 1m 
+plot v(in) v(out)
+plot deriv(v(out))
+.endc
+.end
