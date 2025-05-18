@@ -1,0 +1,172 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[margin=1cm]{geometry}
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+% \usepackage{subfigure}
+\usepackage{xcolor}
+\usepackage[english]{babel}
+\usepackage{fontenc}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+
+\author{Ömer Faruk Birgül}
+\title{Homework 4}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Introduce}
+I used KiCad \& ngspice to simulate inverter. KiCad is normally PCB drawing program but it has simulation capability by using ngspice.
+\section{Inverter Circuits \& Waveforms}
+% \shorthandoff{=}
+
+% \begin{figure}[!h]
+%  \centering
+%     \begin{subfigure}{0.48\textwidth}
+%     \includegraphics[width=\textwidth]{figures/hw4_schematic_inv_1.png}
+%     \caption{Inverter 1.}
+%     \label{fig:first}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.48\textwidth}
+%         \includegraphics[width=\textwidth]{figures/hw4_schematic_inv_2.png}
+%         \caption{Inverter 2.}
+%         \label{fig:second}
+%     \end{subfigure}
+% %  \includegraphics[width=0.5\linewidth]{figures/hw4_schematic_inv_1.png}
+% %  \caption{Inverter 1}
+% \caption{Both inverters shown with their dimensions.}
+% \label{fig:figures}
+% \end{figure}
+\autoref{fig:inv_1} shows the inverter 1 with $W_N = 0.3\mu m$, $L_N = 0.2\mu m$, $W_P = 0.3\mu m$, and $L_P = 0.2\mu m$.
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.5\linewidth]{figures/hw4_schematic_inv_1.png}
+ \caption{Inverter 1.}
+ \label{fig:inv_1}
+\end{figure}
+
+\autoref{fig:inv_2} shows the inverter 2 with $W_N = 0.3\mu m$, $L_N = 0.2\mu m$, $W_P = 0.9\mu m$, and $L_P = 0.2\mu m$.
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.5\linewidth]{figures/hw4_schematic_inv_2.png}
+ \caption{Inverter 2.}
+ \label{fig:inv_2}
+\end{figure}
+
+
+\newpage
+\autoref{fig:wave_vth} shows $V_{th}$ for both inverters. \autoref{fig:wave_vth_cursor} shows cursor location and $V_{th}$ values from the graphics. I can say that, $V_{th1}$ is $740mV$ and $V_{th2}$ is $858mV$
+
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=\linewidth]{figures/hw4_wave_inv_vt_1_2.png}
+ \caption{Plot of inverter 2.}
+ \label{fig:wave_vth}
+\end{figure}
+
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.5\linewidth]{figures/hw4_wave_inv_vt_1_2_values.png}
+ \caption{Plot of inverter 2.}
+ \label{fig:wave_vth_cursor}
+\end{figure}
+
+\newpage
+
+
+\autoref{fig:wave_1} shows both waveforms for inverter 1. Plot at the below shows Vout/Vin and plot at the above shows gain.
+
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.8\linewidth]{figures/hw4_wave2_inv_1.pdf}
+ \caption{Plot of inverter 1.}
+ \label{fig:wave_1}
+\end{figure}
+
+
+\autoref{fig:wave_2} shows both waveforms for inverter 2. Plot at the below shows Vout/Vin and plot at the above shows gain.
+
+
+
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.8\linewidth]{figures/hw4_wave2_inv_2.pdf}
+ \caption{Plot of inverter 2.}
+ \label{fig:wave_2}
+\end{figure}
+
+\newpage
+
+% \begin{figure}[!h]
+%  \centering
+%  \includegraphics[width=\linewidth]{figures/hw4_wave_inv_1.pdf}
+%  \caption{Plot of inverter 1.}
+%  \label{fig:wave_1}
+% \end{figure}
+%
+% \begin{figure}[!h]
+%  \centering
+%  \includegraphics[width=\linewidth]{figures/hw4_wave_inv_2.pdf}
+%  \caption{Plot of inverter 2.}
+%  \label{fig:wave_2}
+% \end{figure}
+% \newpage
+% \section{Waveforms}
+% \begin{figure}[!h]
+%  \centering
+%  \includegraphics[width=0.9\linewidth]{figures/hw4_wave2_inv_1.pdf}
+%  \caption{Plot of inverter 1.}
+%  \label{fig:wave_1}
+% \end{figure}
+%
+% \begin{figure}[!h]
+%  \centering
+%  \includegraphics[width=0.9\linewidth]{figures/hw4_wave2_inv_2.pdf}
+%  \caption{Plot of inverter 2.}
+%  \label{fig:wave_2}
+% \end{figure}
+
+
+\newpage
+\section{Comparison}
+ \begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Property} & \textbf{Inverter 1} & \textbf{Inverter 2} \\
+\hline
+$L_P = L_N$ & $0.2\mu m$ & $0.2\mu m$ \\\hline
+$W_P$       & $0.3\mu m$ & $0.9\mu m$ \\\hline
+$W_N$       & $0.3\mu m$ & $0.3\mu m$ \\\hline
+$V_{IL}$    & $0.579 V$& $0.720 V$ \\\hline
+$V_{OH}$    & $1.730 V$& $1.690 V$\\\hline
+$V_{IH}$    & $0.816 V$& $0.957 V$\\\hline
+$V_{OL}$    & $0.102 V$& $0.111 V$\\\hline
+$NM_L$      & $0.477 V$& $0.609 V$\\\hline
+$NM_H$      & $0.914 V$& $0.733 V$\\\hline
+$V_{TH}$    & $0.740 V$& $0.858 V$\\
+\hline
+\end{tabular}
+\caption{Comparison of properties between Inverter-1 and Inverter-2}
+\end{table}
+
+\begin{itemize}
+ \item $V_{TH}$ is closer to middle point at the inverter 2. This is because in the inverter 2, PMOS is wider. This wide PMOS ($0.9\mu m$) provides more close mobility to $0.3\mu m$ NMOS. Therefor, $V_{TH}$ of the inverter 2 is close to middle point.
+ \item $V_{IL}$ increased because $V_{TH}$ increased to closer to middle point.
+ \item $V_{IH}$ increased because $V_{TH}$ increased to closer to middle point.
+ \item $NM_L$ is higher in the inverter 2. This is because $V_{IL}$ increased when $V_{TH}$ increased to closer to middle point.
+ \item $NM_H$ is lower in the inverter 2. This is because $V_{IH}$ increased when $V_{TH}$ increased to closer to middle point.
+\end{itemize}
+
+
+
+
+\end{document}
+
