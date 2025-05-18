@@ -6,7 +6,7 @@
 .param Wp=10u
 .param Lp=0.18u
 .param Wn=5u
-.param Ln=0.18u
+.param Lnch=0.18u
 .param Cl=10f
 
 * Power supply
@@ -19,7 +19,7 @@ Vin in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)
 M1 out in vdd vdd PMOS W={Wp} L={Lp}
 
 * NMOS (M2)
-M2 out in 0 0 NMOS W={Wn} L={Ln}
+M2 out in 0 0 NMOS W={Wn} L={Lnch}
 
 * Load Capacitance
 Cload out 0 {Cl}
