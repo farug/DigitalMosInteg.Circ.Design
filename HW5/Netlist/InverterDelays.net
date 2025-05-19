@@ -3,11 +3,24 @@
 .incl tsmc18.sp
 
 * Parameters
-.param Wp=10u
-.param Lp=0.18u
+.param Wp=0.3u
+.param Lp=0.2u
 .param Wn=5u
-.param Lnch=0.18u
-.param Cl=10f
+.param Lnch=0.3u
+.param Cl=100f
+
+* Area and Perimeter Calculations
+* PMOS parameters
+.param ad_p=Wp*Lp
+.param as_p=Wp*Lp
+.param pd_p=2*(Wp+Lp)
+.param ps_p=2*(Wp+Lp)
+
+* NMOS parameters
+.param ad_n=Wn*Lnch
+.param as_n=Wn*Lnch
+.param pd_n=2*(Wn+Lnch)
+.param ps_n=2*(Wn+Lnch)
 
 * Power supply
 VDD vdd 0 1.8
@@ -16,27 +29,35 @@ VDD vdd 0 1.8
 Vin in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)
 
 * PMOS (M1)
-M1 out in vdd vdd PMOS W={Wp} L={Lp}
+M1 out in vdd vdd cmosp W={Wp} L={Lp}
 
 * NMOS (M2)
-M2 out in 0 0 NMOS W={Wn} L={Lnch}
+M2 out in 0 0 cmosn W={Wn} L={Lnch}
 
 * Load Capacitance
 Cload out 0 {Cl}
 
 * Simulation control (example: transient analysis)
-.tran 0.1n 10n
+*.tran 0.1n 10n
 
 * Propagation delay measurements
 * tplh: output rising (0 -> 1), input falling (1 -> 0)
-.measure tran tplh TRIG V(in) VAL=0.9 RISE=1 TARG V(out) VAL=0.9 RISE=1
+*.measure tran tplh TRIG V(in) VAL=0.9 RISE=1 TARG V(out) VAL=0.9 RISE=1
 
 * tphl: output falling (1 -> 0), input rising (0 -> 1)
-.measure tran tphl TRIG V(in) VAL=0.9 FALL=1 TARG V(out) VAL=0.9 FALL=1
+*.measure tran tphl TRIG V(in) VAL=0.9 FALL=1 TARG V(out) VAL=0.9 FALL=1
 
+*Measure PMOS Parameters
+*.measure PARAMVAL PARAM='ad_p'
+
+.control
+tran 0.1n 7n
 * Plotting/Printing
 *.print tran V(in) V(out)
 * Or, for some SPICE variants:
- .plot tran V(in) V(out)
+* plot tran(V(out),V(in))
+plot v(in) v(out)
 
+
+.endc
 .end
