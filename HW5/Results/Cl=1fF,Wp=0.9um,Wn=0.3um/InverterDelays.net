@@ -3,7 +3,7 @@
 .incl tsmc18.sp
 
 * Parameters
-.param Wp=0.3u
+.param Wp=0.9u
 .param Lp=0.2u
 .param Wn=0.3u
 .param Lnch=0.2u

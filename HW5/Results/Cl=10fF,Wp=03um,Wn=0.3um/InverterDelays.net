@@ -7,7 +7,7 @@
 .param Lp=0.2u
 .param Wn=0.3u
 .param Lnch=0.2u
-.param Cl=1f
+.param Cl=10f
 
 
 * Power supply
