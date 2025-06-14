@@ -21,24 +21,24 @@ M1_1 n1 in vdd vdd cmosp W={Wp} L={Lp}
 M2_1 n1 in 0 0 cmosn W={Wn} L={Lnch}
 
 * Inverter 2
-M1_2 n2 n1 vdd vdd cmosp W={m*Wp} L={Lp}
-M2_2 n2 n1 0 0 cmosn W={m*Wn} L={Lnch}
+M1_2 n2 n1 vdd vdd cmosp W={2.78u} L={Lp}
+M2_2 n2 n1 0 0 cmosn W={1.85u} L={Lnch}
 
 * Inverter 3
-M1_3 n3 n2 vdd vdd cmosp W={m**2*Wp} L={Lp}
-M2_3 n3 n2 0 0 cmosn W={m**2*Wn} L={Lnch}
+M1_3 n3 n2 vdd vdd cmosp W={10.32u} L={Lp}
+M2_3 n3 n2 0 0 cmosn W={6.88u} L={Lnch}
 
 * Inverter 4
-M1_4 n4 n3 vdd vdd cmosp W={m**3*Wp} L={Lp}
-M2_4 n4 n3 0 0 cmosn W={m**3*Wn} L={Lnch}
+M1_4 n4 n3 vdd vdd cmosp W={38.29u} L={Lp}
+M2_4 n4 n3 0 0 cmosn W={25.53u} L={Lnch}
 
 * Inverter 5
-M1_5 n5 n4 vdd vdd cmosp W={m**4*Wp} L={Lp}
-M2_5 n5 n4 0 0 cmosn W={m**4*Wn} L={Lnch}
+M1_5 n5 n4 vdd vdd cmosp W={142.08u} L={Lp}
+M2_5 n5 n4 0 0 cmosn W={94.72u} L={Lnch}
 
 * Inverter 6
-M1_6 out n5 vdd vdd cmosp W={m**5*Wp} L={Lp}
-M2_6 out n5 0 0 cmosn W={m**5*Wn} L={Lnch}
+M1_6 out n5 vdd vdd cmosp W={527.14u} L={Lp}
+M2_6 out n5 0 0 cmosn W={351.43u} L={Lnch}
 
 * Load Capacitance
 Cload out 0 {Cl}
@@ -51,9 +51,10 @@ Cload out 0 {Cl}
 *.measure tran tphl TRIG V(in) VAL=0.9 FALL=1 TARG V(out) VAL=0.9 FALL=1
 
 .control
-tran 0.1n 7n
+tran 5p 200n
 plot v(in) v(out)
 meas tran tphl TRIG v(in) VAL=0.9 RISE=1 TARG v(out) VAL=0.9 FALL=1
 meas tran tplh TRIG v(in) VAL=0.9 FALL=1 TARG v(out) VAL=0.9 RISE=1
+print m*Wn
 .endc
 .end
