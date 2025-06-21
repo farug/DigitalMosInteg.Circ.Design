@@ -1,0 +1,47 @@
+* Inverter Subcircuit Definition
+* File: inverter_subcircuit.net
+* Description: CMOS Inverter subcircuit with configurable parameters
+* Usage: X1 in out vdd gnd inverter Wp=0.9u Wn=0.3u L=0.2u
+
+* Include the TSMC 0.18um technology models
+.incl tsmc18.sp
+
+* Inverter Subcircuit Definition
+* Syntax: .subckt subcircuit_name port1 port2 port3 port4 [parameters]
+* Ports: in, out, vdd, gnd
+* Parameters: Wp (PMOS width), Wn (NMOS width), L (channel length)
+.subckt inverter in out vdd gnd Wp=0.9u Wn=0.3u L=0.2u
+
+* PMOS transistor (pull-up network)
+* M1 drain gate source bulk model W=width L=length
+M1 out in vdd vdd cmosp W={Wp} L={L}
+
+* NMOS transistor (pull-down network)
+* M2 drain gate source bulk model W=width L=length
+M2 out in gnd gnd cmosn W={Wn} L={L}
+
+* End of subcircuit definition
+.ends inverter
+
+* Example usage of the inverter subcircuit
+* Uncomment the following lines to test the subcircuit
+
+* Power supply
+* VDD vdd 0 1.8
+
+* Input signal (example: pulse)
+* Vin in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)
+
+* Load capacitance
+* Cload out 0 1f
+
+* Instantiate the inverter subcircuit
+* X1 in out vdd 0 inverter Wp=0.9u Wn=0.3u L=0.2u
+
+* Simulation control (example)
+* .control
+* tran 0.1n 10n
+* plot v(in) v(out)
+* .endc
+
+* .end 

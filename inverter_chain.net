@@ -1,0 +1,53 @@
+* Inverter Chain using Subcircuits
+* File: inverter_chain.net
+* Description: Chain of inverters with different configurations
+
+* Include the inverter subcircuit definition
+.incl inverter_subcircuit.net
+
+* Power supply
+VDD vdd 0 1.8
+
+* Input signal
+Vin in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)
+
+* Load capacitance at the end of the chain
+Cload out3 0 1f
+
+* Chain of inverters with different configurations
+* Inverter 1: Standard size (Wp=0.9u, Wn=0.3u)
+X1 in out1 vdd 0 inverter Wp=0.9u Wn=0.3u L=0.2u
+
+* Inverter 2: Larger PMOS for better rise time (Wp=1.8u, Wn=0.3u)
+X2 out1 out2 vdd 0 inverter Wp=1.8u Wn=0.3u L=0.2u
+
+* Inverter 3: Larger NMOS for better fall time (Wp=0.9u, Wn=0.6u)
+X3 out2 out3 vdd 0 inverter Wp=0.9u Wn=0.6u L=0.2u
+
+* Simulation control
+.control
+* Transient analysis
+tran 0.1n 15n
+
+* Plot all signals
+plot v(in) v(out1) v(out2) v(out3)
+
+* Measure delays between stages
+* Delay from input to output1
+meas tran delay1 TRIG v(in) VAL=0.9 RISE=1 TARG v(out1) VAL=0.9 FALL=1
+
+* Delay from output1 to output2
+meas tran delay2 TRIG v(out1) VAL=0.9 RISE=1 TARG v(out2) VAL=0.9 FALL=1
+
+* Delay from output2 to output3
+meas tran delay3 TRIG v(out2) VAL=0.9 RISE=1 TARG v(out3) VAL=0.9 FALL=1
+
+* Total delay through the chain
+meas tran total_delay TRIG v(in) VAL=0.9 RISE=1 TARG v(out3) VAL=0.9 FALL=1
+
+* Print measurement results
+print delay1 delay2 delay3 total_delay
+
+.endc
+
+.end 

@@ -1,0 +1,76 @@
+* Zipper Gate - Fixed Version
+
+.incl tsmc18.sp
+
+* Parameters
+.param wp=0.3u
+.param wn=0.3u
+
+* Power supply
+VDD vdd 0 1.8
+
+* Input pulse
+Vin in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)
+
+* Input signals - Fixed: Added missing voltage source for node c
+va a 0 pulse 0 1.8 16.1n 100p 100p 15.9n 32n
+vb b 0 pulse 0 1.8 8.1n 100p 100p 7.9n 16n
+vc c 0 pulse 0 1.8 4.1n 100p 100p 3.9n 8n
+vd d 0 pulse 0 1.8 2n 100p 100p 2n 4n
+
+* Clock signals
+vclk clk   0 pulse 0 1.8 0.4n 100p 100p 1n 2n
+vclkn clkn 0 pulse 1.8 0 0.4n 100p 100p 1n 2n
+
+* Stage 1 - Fixed: Pass node c as parameter
+mp1 out1 clk vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+xstage1 a b c out1 ncon1 stage1
+mn1 ncon1 clk 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+
+* Stage 2
+mp2 pcon2 clkn vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+xstage2 d out1 out2 pcon2 stage2
+mn2 out2 clkn 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+
+* Stage 3
+mp3 y clk vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+xstage3 a c y ncon3 out2 stage3
+mn3 ncon3 clk 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+
+* Fixed subcircuit definitions
+.subckt stage1 a b c out ncon wn=0.3u
+m1 out b n1 n1 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+m2 n1 c ncon ncon cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+.ends
+
+.subckt stage2 d stagein out pcon wp=0.3u
+m1 out d pcon pcon cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+m2 out stagein pcon pcon cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+.ends
+
+.subckt stage3 a c out ncon stagein wn=0.3u
+m1 out c ncon ncon cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+m2 out a n1 n1 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+m3 n1 stagein ncon ncon cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+.ends
+
+.subckt inv in out wp=0.3u wn=0.3u
+m1 out in vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+m2 out in 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+.ends
+
+.control
+* Run transient simulation first
+tran 0.1n 40n
+
+* Then plot the signals
+plot V(a) V(b) V(c) V(d)
+plot V(clk) V(clkn)
+plot V(out1) V(out2) V(y)
+
+* Optional: measure delays if needed
+* meas tran tphl TRIG v(in) VAL=0.9 RISE=1 TARG v(out) VAL=0.9 FALL=1
+* meas tran tplh TRIG v(in) VAL=0.9 FALL=1 TARG v(out) VAL=0.9 RISE=1
+.endc
+
+.end 

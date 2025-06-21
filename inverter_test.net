@@ -1,0 +1,43 @@
+* Inverter Subcircuit Test Circuit
+* File: inverter_test.net
+* Description: Complete test circuit using the inverter subcircuit
+
+* Include the inverter subcircuit definition
+.incl inverter_subcircuit.net
+
+* Power supply
+VDD vdd 0 1.8
+
+* Input signal - pulse waveform
+* PULSE(V1 V2 TD TR TF PW PER)
+* V1=low voltage, V2=high voltage, TD=delay, TR=rise time, TF=fall time, PW=pulse width, PER=period
+Vin in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)
+
+* Load capacitance
+Cload out 0 1f
+
+* Instantiate the inverter subcircuit
+* X1 in out vdd 0 inverter Wp=0.9u Wn=0.3u L=0.2u
+X1 in out vdd 0 inverter Wp=0.9u Wn=0.3u L=0.2u
+
+* Simulation control
+.control
+* Transient analysis
+tran 0.1n 10n
+
+* Plot input and output waveforms
+plot v(in) v(out)
+
+* Measure propagation delays
+* tphl: output falling (1->0), input rising (0->1)
+meas tran tphl TRIG v(in) VAL=0.9 RISE=1 TARG v(out) VAL=0.9 FALL=1
+
+* tplh: output rising (0->1), input falling (1->0)
+meas tran tplh TRIG v(in) VAL=0.9 FALL=1 TARG v(out) VAL=0.9 RISE=1
+
+* Print measurement results
+print tphl tplh
+
+.endc
+
+.end 

@@ -1,2 +1,2 @@
 S = Cin . (~A.~B + A.B ) + ~Cin . (~A.B + A.~B)
-Cout = Cin . (A.~B + ~A.B + A.B ) + ~Cin.A.B
+Cout = Cin . (A.1 + ~A.B ) + ~Cin.(A.B+~A.0)

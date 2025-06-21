@@ -36,7 +36,6 @@ Cload out 0 {Cl}
 * tphl: output falling (1 -> 0), input rising (0 -> 1)
 *.measure tran tphl TRIG V(in) VAL=0.9 FALL=1 TARG V(out) VAL=0.9 FALL=1
 
-
 .control
 tran 0.1n 7n
 plot v(in) v(out)

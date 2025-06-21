@@ -1,0 +1,68 @@
+* Pass Logic
+
+.incl tsmc18.sp
+
+* Parameters
+.param wp=0.3u
+.param wn=0.3u
+
+* Power supply
+VDD vdd 0 1.8
+
+* Input Sources
+va A 0 pulse 0 1.8 8n 50p 50p 8n 16n
+vb B 0 pulse 0 1.8 4.05n 50p 50p 4n 8.0n
+vcin Cin 0 pulse 0 1.8 2n 50p 50p 2n 4n
+
+* Not Signals
+xan a an inv
+xbn b bn inv
+xncin cin ncin inv
+
+
+* S Part
+
+x1 b t1 an a Transmissiongate
+x2 bn t1 a an Transmissiongate
+
+x3 b t2 a an Transmissiongate
+x4 bn t2 an a Transmissiongate
+
+x5 t1 s ncin cin Transmissiongate
+x6 t2 s cin ncin Transmissiongate
+
+* Cout Part
+
+x7 b t3 a an Transmissiongate
+X8 1 t3 an a Transmissiongate
+
+x9 b t4 an a Transmissiongate
+x10 0 t4 a an Transmissiongate
+
+x11 t3 Cout ncin cin Transmissiongate
+x12 t4 Cout cin ncin Transmissiongate
+
+
+* Transmission Gate
+.subckt Transmissiongate in out pin nin wp=0.3u wn=0.3u
+
+m1 out pin in vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+m2 in nin out 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+
+.ends
+
+.subckt inv in out wp=0.3u wn=0.3u
+
+m1 out in vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+m2 out in 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+
+.ends
+
+.control
+
+tran 1p 16n
+plot v(Cin) v(B)+2 v(A)+4 v(S)+6 v(Cout)+8
+
+.endc
+
+.end
