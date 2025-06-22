@@ -1,7 +1,7 @@
 * Zipper Gate
 
 .incl tsmc18.sp
-
+.global vdd
 * Parameters
 .param wp=0.3u
 .param wn=0.3u
@@ -24,7 +24,7 @@ vclkn clkn 0 pulse 1.8 0 0.4n 100p 100p 1n 2n
 * Stage 1
 
 mp1 out1 clk vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
-xstage1 a b c out1 ncon1 stage1
+xstage1 b c out1 ncon1 stage1
 mn1 ncon1 clk 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
 
 * Stage 2
@@ -43,7 +43,7 @@ mn3 ncon3 clk 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55
 xinv1 y y1 inv
 xinv2 y1 y2 inv
 
-.subckt stage1 a b c out ncon wn=0.3u
+.subckt stage1 b c out ncon wn=0.3u
 
 m1 out b n1 n1 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
 m2 n1 c ncon ncon cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'

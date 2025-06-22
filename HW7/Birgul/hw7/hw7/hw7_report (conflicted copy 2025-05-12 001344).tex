@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw}]
+    \node (1) at (0,0) {1};
+    \node (2) at (0,-4) {2};
+    \node (3) at (0,-8) {4};
+    \node (4) at (0,-12) {4};
+    \node (5) at (8,0) {5};
+    \node (6) at (8,4) {6} ;
+    \node (7) at (-5,3) {7} ;
+    \node (8) at (-5,4) {8} ;
+    \node (9) at (-5,5) {9} ;
+\end{scope}
+
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle},
+              every edge/.style={draw=red,very thick}]
+    \path [->] (1) edge node {$X2$} (2);
+    \path [->] (1) edge[bend right=60] node {$X1$} (2);
+    \path [->] (1) edge[bend left=60] node {$X3$} (2);
+    \path [->] (2) edge node {$X4$} (3);
+    \path [->] (3) edge[bend right=30] node {$X5$} (4);
+    \path [->] (3) edge[bend left=30] node {$X6$} (4);
+    \path [->] (1) edge[bend left=60] node {$X7$} (4);
+%     \path [->] (1) edge node {$4$} (4);
+%     \path [->] (4) edge node {$3$} (3);
+%     \path [->] (1) edge node {$3$} (5);
+%     \path [->] (4) edge node {$3$} (5);
+%     \path [->] (4) edge node {$3$} (6);
+%     \path [->] (3) edge node {$5$} (6);
+%     \path [->] (5) edge node {$8$} (6);
+%     \path [->] (2) edge[bend right=60] node {$1$} (5);
+\end{scope}
+\end{tikzpicture}
+\end{document}

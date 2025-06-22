@@ -9,8 +9,8 @@ d latch
 vdd vdd 0 dc 1.8
 
 * Signals
-vclk clk 0 pulse 1.8 0 10.5n 10p 
-vin d 0 pulse 0 1.8 100p 10p 10p 5n 10n
+vclk clk 0 pulse 1.8 0 12n 10p 
+vin d 0 pulse 0 1.8 100p 10p 10p 2n 4.2n
 
 m1 dn d vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
 m2 n1 d vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'

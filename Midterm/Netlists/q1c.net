@@ -1,0 +1,35 @@
+midterm q1c
+.incl tsmc18.sp
+
+.param wp=0.3u
+.param wn=0.3u
+
+vdd vdd 0 dc 1.8
+Vx1 x1 0 PULSE(0 1.8 0n 1n 1n 5n 10n)
+Vx2 x2 0 PULSE(0 1.8 0n 1n 1n 10n 20n)
+Vx3 x3 0 PULSE(0 1.8 0n 1n 1n 20n 40n)
+Vx4 x4 0 PULSE(0 1.8 0n 1n 1n 40n 80n)
+Vx5 x5 0 PULSE(0 1.8 0n 1n 1n 80n 160n)
+
+mp1 p1 x1 vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+mp2 y x2 p1 p1 cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+mp3 y x3 p1 p1 cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+mp4 p1 x4 p2 p2 cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+mp5 p2 x5 vdd vdd cmosp w='wp' l=0.2u ad='wp*0.55u' as='wp*0.55u' pd='2*(wp+0.55u)' ps='2*(wp+0.55u)'
+
+
+mn1 y x1 n1 n1 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+mn2 y x2 n2 n2 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+mn3 n2 x3 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+mn4 n1 x4 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+mn5 n1 x5 0 0 cmosn w='wn' l=0.2u ad='wn*0.55u' as='wn*0.55u' pd='2*(wn+0.55u)' ps='2*(wn+0.55u)'
+
+.control
+
+tran 0.5n 160n
+
+plot v(x1) v(x2)+2 v(x3)+4 v(x4)+6 v(x5)+8 v(y)+10
+
+.endc
+
+.end
